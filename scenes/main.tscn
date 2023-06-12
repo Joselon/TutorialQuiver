@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhlo8mnec2fu3"]
+[gd_scene load_steps=9 format=3 uid="uid://dhlo8mnec2fu3"]
 
 [ext_resource type="Texture2D" uid="uid://bp5enyqc34mfp" path="res://assets/sprites/Background/background_static.png" id="1_70b7l"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_wx5gn"]
 [ext_resource type="PackedScene" uid="uid://01mejfcfitnx" path="res://scenes/plattform.tscn" id="2_qs2mc"]
+[ext_resource type="Script" path="res://scripts/PlayArea.gd" id="3_m1o6h"]
 [ext_resource type="PackedScene" uid="uid://w6ebicywliv5" path="res://scenes/player.tscn" id="3_thfh2"]
 [ext_resource type="AudioStream" uid="uid://balgdsv5f1ji0" path="res://assets/sounds/collect.wav" id="6_a44iy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3am35"]
+size = Vector2(1800, 2000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ncmx1"]
+size = Vector2(3000, 20)
 
 [node name="World" type="Node2D" groups=["example"]]
 script = ExtResource("1_wx5gn")
@@ -20,6 +27,20 @@ texture = ExtResource("1_70b7l")
 [node name="Enviroment" type="Node2D" parent="."]
 
 [node name="Static" type="Node2D" parent="Enviroment"]
+
+[node name="PlayArea" type="Area2D" parent="Enviroment/Static"]
+collision_mask = 4
+script = ExtResource("3_m1o6h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/Static/PlayArea"]
+shape = SubResource("RectangleShape2D_3am35")
+
+[node name="Ground" type="Area2D" parent="Enviroment/Static"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/Static/Ground"]
+position = Vector2(0, 2000)
+shape = SubResource("RectangleShape2D_ncmx1")
 
 [node name="Moving" type="Node2D" parent="Enviroment"]
 
@@ -59,3 +80,36 @@ theme_override_constants/outline_size = 7
 theme_override_font_sizes/font_size = 30
 text = "Score: 1000"
 horizontal_alignment = 2
+
+[node name="Ammo" type="Label" parent="HUD/UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -146.0
+offset_top = 65.0
+offset_bottom = 110.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 30
+text = "Ammo: 1000"
+horizontal_alignment = 2
+
+[node name="GameOver" type="Label" parent="HUD/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -26.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 30
+text = "Game Over. You scored %s points!
+Press \"Jump\" to restart"
+horizontal_alignment = 1
