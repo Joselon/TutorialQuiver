@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhlo8mnec2fu3"]
+
+[ext_resource type="Texture2D" uid="uid://bp5enyqc34mfp" path="res://assets/sprites/Background/background_static.png" id="1_70b7l"]
+[ext_resource type="PackedScene" uid="uid://01mejfcfitnx" path="res://scenes/plattform.tscn" id="2_qs2mc"]
+[ext_resource type="PackedScene" uid="uid://w6ebicywliv5" path="res://scenes/player.tscn" id="3_thfh2"]
+
+[node name="World" type="Node2D" groups=["example"]]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2(1.5, 1.5)
+
+[node name="Background" type="Sprite2D" parent="Camera2D"]
+scale = Vector2(1, 0.991)
+texture = ExtResource("1_70b7l")
+
+[node name="Enviroment" type="Node2D" parent="."]
+
+[node name="Static" type="Node2D" parent="Enviroment"]
+
+[node name="Moving" type="Node2D" parent="Enviroment"]
+
+[node name="Plattform" parent="Enviroment/Moving" instance=ExtResource("2_qs2mc")]
+
+[node name="Player" parent="." instance=ExtResource("3_thfh2")]
+position = Vector2(-129, -274)
+scale = Vector2(0.4, 0.4)
