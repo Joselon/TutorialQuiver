@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b1pomkscbdx8o" path="res://assets/sprites/Platform/platform.png" id="1_kdeaf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbkml"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm8mh"]
 size = Vector2(380, 40)
 
 [node name="Plattform" type="StaticBody2D"]
@@ -12,4 +12,4 @@ texture = ExtResource("1_kdeaf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
-shape = SubResource("RectangleShape2D_sbkml")
+shape = SubResource("RectangleShape2D_dm8mh")

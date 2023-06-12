@@ -9,6 +9,9 @@ extends Node2D
 
 
 var plattform = preload("res://scenes/plattform.tscn")
+var plattform_collectible_single = preload("res://scenes/plattform_collectible_single.tscn")
+var plattform_collectible_row = preload("res://scenes/plattform_collectible_row.tscn")
+var plattform_collectible_column = preload("res://scenes/plattform_collectible_column.tscn")
 var rng = RandomNumberGenerator.new()
 var last_plattform_position = Vector2.ZERO
 var next_spawn_time = 0
@@ -30,7 +33,14 @@ func _process(delta):
 	score_label.text = "Score: %s"% score
 	
 func _spawn_next_platfform():
-	var new_plattform = plattform.instantiate()
+	var avalaible_plattforms = [
+		plattform,
+		plattform_collectible_single,
+		plattform_collectible_row,
+		plattform_collectible_column
+	]
+
+	var new_plattform = avalaible_plattforms.pick_random().instantiate()
 		#set position
 	if last_plattform_position == Vector2.ZERO :
 		new_plattform.position = Vector2(400,0)
