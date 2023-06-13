@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://dint1qt5k47er"]
+
+[ext_resource type="Texture2D" uid="uid://bp5enyqc34mfp" path="res://assets/sprites/Background/background_static.png" id="1_vqnms"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="2_pr4q7"]
+
+[node name="Menu" type="Node2D"]
+
+[node name="BackgroundStatic" type="Sprite2D" parent="."]
+position = Vector2(940, 540)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_vqnms")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 128
+text = "Tutorial Quiver Godot JNO"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_pr4q7")
+
+[node name="StartButton" type="Button" parent="UI/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "Start Game"
+
+[node name="ExitButton" type="Button" parent="UI/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "Exit
+"

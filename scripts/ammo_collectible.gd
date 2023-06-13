@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var value = 10
+@export var value = 3
 @onready var player = $"/root/World/Player"
 @onready var sprite = $AnimatedSprite2D
 @onready var pickup_sound = $PickupSound

@@ -3,17 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://b1pomkscbdx8o" path="res://assets/sprites/Platform/platform.png" id="1_owp8d"]
 [ext_resource type="PackedScene" uid="uid://cvo801jj1w2fk" path="res://scenes/enemy.tscn" id="2_358ea"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_inp6f"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xsf8"]
 size = Vector2(380, 40)
 
 [node name="Plattform" type="StaticBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 1)
 texture = ExtResource("1_owp8d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
-shape = SubResource("RectangleShape2D_inp6f")
+scale = Vector2(2, 1)
+shape = SubResource("RectangleShape2D_3xsf8")
 
 [node name="Enemy" parent="." instance=ExtResource("2_358ea")]
 position = Vector2(146, -106)

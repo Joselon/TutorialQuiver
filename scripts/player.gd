@@ -14,6 +14,9 @@ signal player_died
 @onready var game = $"/root/World/"
 @onready var camera = $"/root/World/Camera2D"
 
+@onready var jump_button = $"/root/World/HUD/UI/TouchButtons/JumpTouchButton"
+@onready var fire_button = $"/root/World/HUD/UI/TouchButtons/FireTouchButton"
+
 var projectile = preload("res://scenes/projectile.tscn")
 var active = true
 var jumps_remaining = 2
@@ -38,7 +41,7 @@ func _physics_process(delta):
 			sprite.play("run")
 			jump_pitch = 1.0
 		#handle jumping
-		if Input.is_action_just_pressed("jump") and jumps_remaining>0:
+		if (Input.is_action_just_pressed("jump") or jump_button.is_pressed()) and jumps_remaining>0:
 			jumps_remaining -= 1
 			was_jumping = true
 			velocity.y = -jump_power
@@ -54,7 +57,7 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _input(event):
-	if event.is_action_pressed("fire") and ammo > 0:
+	if (event.is_action_pressed("fire") or fire_button.is_pressed()) and ammo > 0 and active == true:
 		var projectile_instance = projectile.instantiate()
 		projectile_instance.position = projectile_position.global_position
 		game.add_child(projectile_instance)
