@@ -135,9 +135,12 @@ alignment = 1
 script = ExtResource("7_ccqda")
 
 [node name="JumpTouchButton" type="TouchScreenButton" parent="HUD/UI/TouchButtons"]
+process_mode = 1
 position = Vector2(425, 560)
 shape = SubResource("RectangleShape2D_858eo")
+passby_press = true
 
 [node name="FireTouchButton" type="TouchScreenButton" parent="HUD/UI/TouchButtons"]
 position = Vector2(1510, 555)
 shape = SubResource("RectangleShape2D_6t0oq")
+passby_press = true

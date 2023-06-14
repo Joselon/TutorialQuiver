@@ -12,6 +12,7 @@ signal game_over
 @onready var player = $"/root/World/Player"
 @onready var ground = $"/root/World/Enviroment/Static/Ground"
 @onready var game_over_label = $"/root/World/HUD/UI/GameOver"
+@onready var jump_button = $"/root/World/HUD/UI/TouchButtons/JumpTouchButton"
 
 
 var plattform = preload("res://scenes/plattform.tscn")
@@ -35,8 +36,8 @@ func _ready():
 #called every frame. 'delta' is elapsed time since the prev
 func _process(delta):
 	if not player.active:
-		if Input.is_action_just_pressed("jump"):
-			get_tree().reload_current_scene()
+		if Input.is_action_just_pressed("jump") or jump_button.is_pressed():
+			get_tree().change_scene_to_file("res://scenes/menu.tscn")
 		return
 		
 	if Time.get_ticks_msec() > reset_collectible_pitch_time:

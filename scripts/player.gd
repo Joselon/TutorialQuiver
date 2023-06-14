@@ -19,14 +19,18 @@ signal player_died
 
 var projectile = preload("res://scenes/projectile.tscn")
 var active = true
+var enabledJumpButton = true
+var enabledFireButton = true
 var jumps_remaining = 2
 var was_jumping = false
 var jump_pitch = 1.0
 var ammo = 3
 
 func _ready():
-	print("hello world")
 	sprite.animation_finished.connect(_on_animation_finished)
+	jump_button.released.connect(_on_jump_is_realesed)
+	fire_button.released.connect(_on_fire_is_realesed)
+
 	
 func _physics_process(delta):
 	velocity.y += gravity * delta
@@ -41,7 +45,8 @@ func _physics_process(delta):
 			sprite.play("run")
 			jump_pitch = 1.0
 		#handle jumping
-		if (Input.is_action_just_pressed("jump") or jump_button.is_pressed()) and jumps_remaining>0:
+		if (Input.is_action_just_pressed("jump") or (jump_button.is_pressed() and enabledJumpButton)) and jumps_remaining>0:
+			enabledJumpButton = false
 			jumps_remaining -= 1
 			was_jumping = true
 			velocity.y = -jump_power
@@ -57,7 +62,8 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _input(event):
-	if (event.is_action_pressed("fire") or fire_button.is_pressed()) and ammo > 0 and active == true:
+	if (event.is_action_pressed("fire") or (fire_button.is_pressed() and enabledFireButton)) and ammo > 0 and active == true:
+		enabledFireButton = false
 		var projectile_instance = projectile.instantiate()
 		projectile_instance.position = projectile_position.global_position
 		game.add_child(projectile_instance)
@@ -68,7 +74,13 @@ func _input(event):
 func _on_animation_finished():
 	if sprite.animation == "shoot":
 		sprite.play("run")
-
+		
+func _on_jump_is_realesed():
+	enabledJumpButton = true
+	
+func _on_fire_is_realesed():
+	enabledFireButton = true
+	
 func add_ammo(amount):
 	ammo += amount
 
